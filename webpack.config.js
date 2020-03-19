@@ -10,6 +10,7 @@ var config = {
         port: 2020,
         hot: true,
         publicPath: '/',
+        historyApiFallback: true,
         watchContentBase: true,
     },
     output: {
@@ -21,6 +22,7 @@ var config = {
             title: 'KenPile',
             filename: 'index.html',
             template: './src/index.html',
+            //scriptLoading: 'defer',
         }),
         new MiniCssExtractPlugin({
             filename: '[name].[contenthash].css',
