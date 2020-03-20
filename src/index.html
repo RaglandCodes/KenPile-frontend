@@ -3,16 +3,14 @@
     <head>
         <meta charset="UTF-8" />
         <title>KenPile</title>
-        <meta name="google-signin-scope" content="profile email" />
+
+        <!-- <meta name="google-signin-scope" content="profile email" />
         <meta
             name="google-signin-client_id"
             content="906977270322-n4u9v0sua99hiqbjtmsjg7tfji2qihqo.apps.googleusercontent.com"
-        />
-        <script
-            src="https://apis.google.com/js/platform.js"
-            async
-            defer
-        ></script>
+        /> -->
+        <script src="https://apis.google.com/js/api:client.js"></script>
+        <script></script>
     </head>
     <body>
         <div id="nav">
@@ -28,6 +26,7 @@
             </div>
             <div id="body--home" class="body--page">
                 This is the home page. Shown after loging in
+                <button id="home--newNote">New note</button>
             </div>
             <div id="body--user" class="body--page">
                 <p>
@@ -35,11 +34,16 @@
                     stored. You also understand this site is not run by a
                     security expert.
                 </p>
-                <div
+                <!-- <div
                     class="g-signin2"
                     data-onsuccess="onSignIn"
                     data-theme="dark"
-                ></div>
+                ></div> -->
+
+                <div id="GSingInBtn" class="customGPlusSignIn">
+                    <span class="icon">G</span>
+                    <span class="buttonText">Sign in with Google</span>
+                </div>
             </div>
         </div>
     </body>

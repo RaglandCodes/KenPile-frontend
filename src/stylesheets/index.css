@@ -17,7 +17,7 @@ body {
     grid-template-columns: var(--nav-width) calc(100% - var(--nav-width));
 }
 #body {
-    background-color: burlywood;
+    /* background-color: burlywood; */
     grid-column-start: 2;
     grid-column-end: 3;
 
