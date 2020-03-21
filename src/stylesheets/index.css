@@ -39,6 +39,23 @@ body {
     flex-grow: 1;
 }
 
+.nav--btn {
+    /* border: none; */
+    background-color: inherit;
+    height: 100%;
+}
 .hidden {
     display: none;
+}
+
+#GSingInBtn {
+    border: 1px solid black;
+    display: flex;
+    border-radius: 5px;
+    padding: 22px;
+}
+
+#GSingInBtn--icon {
+    width: 31px;
+    height: 31px;
 }

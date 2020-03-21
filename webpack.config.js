@@ -2,6 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackInlineSVGPlugin = require('html-webpack-inline-svg-plugin');
 
 //default configs
 var config = {
@@ -23,6 +24,9 @@ var config = {
             filename: 'index.html',
             template: './src/index.html',
             //scriptLoading: 'defer',
+        }),
+        new HtmlWebpackInlineSVGPlugin({
+            runPreEmit: true,
         }),
         new MiniCssExtractPlugin({
             filename: '[name].[contenthash].css',

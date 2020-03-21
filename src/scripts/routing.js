@@ -6,7 +6,7 @@ console.log(`${JSON.stringify(userState, null, 2)} <== userState`);
 
 // -----  constants / globals -----
 const userBtn = document.querySelector('#nav--userBtn');
-const homeBtn = document.querySelector('#nav--tags');
+const homeBtn = document.querySelector('#nav--notesBtn');
 
 const userPage = document.querySelector('#body--user');
 const landingPage = document.querySelector('#body--landing');

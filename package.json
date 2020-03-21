@@ -8,12 +8,17 @@
         "build": "webpack --mode=production",
         "deploy": "npm run build && cd build && netlify deploy --prod"
     },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/RaglandCodes/KenPile-frontend"
+    },
     "author": "Ragland Asir",
     "license": "ISC",
     "devDependencies": {
         "clean-webpack-plugin": "^3.0.0",
         "css-loader": "^3.4.2",
         "html-loader": "^0.5.5",
+        "html-webpack-inline-svg-plugin": "^1.3.0",
         "html-webpack-plugin": "^3.2.0",
         "mini-css-extract-plugin": "^0.9.0",
         "script-loader": "^0.7.2",

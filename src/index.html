@@ -14,9 +14,25 @@
     </head>
     <body>
         <div id="nav">
-            <div id="nav--tags" class="nav--item">##</div>
+            <div id="nav--tags" class="nav--item">
+                <button class="nav--btn" id="nav--notesBtn">
+                    <img
+                        inline
+                        src="src/assets/note_outlined.svg"
+                        width="31px"
+                        height="31px"
+                    />
+                </button>
+            </div>
             <div id="nav--user" class="nav--item">
-                <button class="nav--btn" id="nav--userBtn">U</button>
+                <button class="nav--btn" id="nav--userBtn">
+                    <img
+                        inline
+                        src="./src/assets/user_outlined.svg"
+                        width="31px"
+                        height="31px"
+                    />
+                </button>
             </div>
         </div>
         <div id="body">
@@ -24,25 +40,35 @@
                 <h1>KenPile</h1>
                 This is the landing page. Shown to new users
             </div>
-            <div id="body--home" class="body--page">
+            <div id="body--home" class="body--page hidden">
                 This is the home page. Shown after loging in
                 <button id="home--newNote">New note</button>
             </div>
-            <div id="body--user" class="body--page">
-                <p>
-                    By signing in, you understand that your email will be
-                    stored. You also understand this site is not run by a
-                    security expert.
-                </p>
-                <!-- <div
-                    class="g-signin2"
-                    data-onsuccess="onSignIn"
-                    data-theme="dark"
-                ></div> -->
+            <div id="body--user" class="body--page hidden">
+                <div id="user--beforeSI">
+                    <p>
+                        By signing in, you understand that your email will be
+                        stored. You also understand this site is not run by a
+                        security expert.
+                    </p>
 
-                <div id="GSingInBtn" class="customGPlusSignIn">
-                    <span class="icon">G</span>
-                    <span class="buttonText">Sign in with Google</span>
+                    <div id="GSingInBtn" class="customGPlusSignIn">
+                        <img
+                            inline
+                            class="icon"
+                            id="GSingInBtn--icon"
+                            src="./src/assets/Google_G.svg"
+                            width="31px"
+                            height="31px"
+                        />
+
+                        <span class="buttonText">Sign in with Google</span>
+                    </div>
+                </div>
+
+                <div id="user--afterSI" class="hidden">
+                    <span id="user--nameSpan"></span>
+                    <button id="logoutBtn">Logout</button>
                 </div>
             </div>
         </div>

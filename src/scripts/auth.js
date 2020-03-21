@@ -1,11 +1,15 @@
 import { dataFetch } from './dataFetch';
 
 const singInBtn = document.querySelector('#GSingInBtn');
+const beforeSignInSection = document.querySelector('#user--beforeSI');
+const afterSignInSection = document.querySelector('#user--afterSI');
+const userNameSpan = document.querySelector('#user--nameSpan');
 let userState = {
     signedIn: false,
 };
 
-var googleUser = {};
+let userInfo = {};
+let googleUser = {};
 function startApp() {
     gapi.load('auth2', function() {
         var auth2 = gapi.auth2.init({
@@ -17,6 +21,7 @@ function startApp() {
             singInBtn,
             {},
             googleUser => {
+                userInfo = googleUser;
                 verifyIdToken(googleUser.uc.id_token);
             },
             error => {
@@ -33,8 +38,19 @@ async function verifyIdToken(idToken) {
         { token: idToken },
         null
     );
-    if (signInRespnse.status === 'OK') {
+
+    if (signInRespnse === 'ERROR') {
+        alert('Somehting went wrong');
+    } else if (signInRespnse.status === 'OK') {
         userState['signedIn'] = true;
+
+        beforeSignInSection.classList.add('hidden');
+        afterSignInSection.classList.remove('hidden');
+        console.log(`${JSON.stringify(userInfo, null, 2)} <== userInfo`);
+        console.dir(userInfo);
+
+        userNameSpan.innerText = userInfo.Qt.Ad;
+
         console.log('Verified');
     } else {
         console.log(
