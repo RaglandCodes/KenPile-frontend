@@ -1,15 +1,20 @@
 import { dataFetch } from './dataFetch';
 
 const singInBtn = document.querySelector('#GSingInBtn');
+const singOutBtn = document.querySelector('#logoutBtn');
+
 const beforeSignInSection = document.querySelector('#user--beforeSI');
 const afterSignInSection = document.querySelector('#user--afterSI');
 const userNameSpan = document.querySelector('#user--nameSpan');
+
 let userState = {
     signedIn: false,
 };
 
 let userInfo = {};
 let googleUser = {};
+
+// TODO rename this function
 function startApp() {
     gapi.load('auth2', function() {
         var auth2 = gapi.auth2.init({
@@ -31,6 +36,15 @@ function startApp() {
     });
 }
 
+function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(() => {
+        userState['signedIn'] = true;
+        beforeSignInSection.classList.remove('hidden');
+        afterSignInSection.classList.add('hidden');
+    });
+}
+
 async function verifyIdToken(idToken) {
     let signInRespnse = await dataFetch(
         'POST',
@@ -46,6 +60,7 @@ async function verifyIdToken(idToken) {
 
         beforeSignInSection.classList.add('hidden');
         afterSignInSection.classList.remove('hidden');
+
         console.log(`${JSON.stringify(userInfo, null, 2)} <== userInfo`);
         console.dir(userInfo);
 
@@ -62,6 +77,10 @@ async function verifyIdToken(idToken) {
 //TODO do this earlier.
 singInBtn.addEventListener('click', () => {
     startApp();
+});
+
+singOutBtn.addEventListener('click', () => {
+    signOut();
 });
 // window.WINDOWSTARTAPP = startApp;
 export { userState, startApp };
