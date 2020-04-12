@@ -5,6 +5,8 @@ const singOutBtn = document.querySelector('#logoutBtn');
 
 const beforeSignInSection = document.querySelector('#user--beforeSI');
 const afterSignInSection = document.querySelector('#user--afterSI');
+const homePage = document.querySelector('#body--home');
+const landingPage = document.querySelector('#body--landing');
 const userNameSpan = document.querySelector('#user--nameSpan');
 
 let userState = {
@@ -14,9 +16,18 @@ let userState = {
 let userInfo = {};
 let googleUser = {};
 
+if (localStorage.getItem('signedIn') === 'true') {
+    dataFetch('POST', 'logBackIn').then(res => {
+        if (res.body === 'Verified') {
+            homePage.classList.remove('hidden');
+            landingPage.classList.add('hidden');
+            userState['signedIn'] = false;
+        }
+    });
+}
 // TODO rename this function
 function startApp() {
-    gapi.load('auth2', function() {
+    gapi.load('auth2', function () {
         var auth2 = gapi.auth2.init({
             client_id:
                 '906977270322-n4u9v0sua99hiqbjtmsjg7tfji2qihqo.apps.googleusercontent.com',
@@ -27,7 +38,7 @@ function startApp() {
             {},
             googleUser => {
                 userInfo = googleUser;
-                verifyIdToken(googleUser.uc.id_token);
+                verifyIdToken(googleUser.tc.id_token);
             },
             error => {
                 alert(JSON.stringify(error, undefined, 2));
@@ -39,9 +50,13 @@ function startApp() {
 function signOut() {
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(() => {
-        userState['signedIn'] = true;
-        beforeSignInSection.classList.remove('hidden');
-        afterSignInSection.classList.add('hidden');
+        userState['signedIn'] = false;
+        localStorage.setItem('signedIn', 'false');
+        //beforeSignInSection.classList.remove('hidden');
+        //afterSignInSection.classList.add('hidden');
+
+        //homePage.classList.add('hidden');
+        landingPage.classList.remove('hidden');
     });
 }
 
@@ -58,15 +73,14 @@ async function verifyIdToken(idToken) {
     } else if (signInRespnse.status === 'OK') {
         userState['signedIn'] = true;
 
-        beforeSignInSection.classList.add('hidden');
-        afterSignInSection.classList.remove('hidden');
+        //beforeSignInSection.classList.add('hidden');
+        //afterSignInSection.classList.remove('hidden');
 
-        console.log(`${JSON.stringify(userInfo, null, 2)} <== userInfo`);
-        console.dir(userInfo);
+        homePage.classList.remove('hidden');
+        landingPage.classList.add('hidden');
+        localStorage.setItem('signedIn', 'true');
 
-        userNameSpan.innerText = userInfo.Qt.Ad;
-
-        console.log('Verified');
+        //userNameSpan.innerText = userInfo.Pt.Ad;
     } else {
         console.log(
             `${JSON.stringify(signInRespnse, null, 2)} <= signInRespnse`

@@ -21,20 +21,20 @@ function hideAllPages() {
 }
 
 // -----  event listeners  -----
-userBtn.addEventListener('click', () => {
-    console.log(`${JSON.stringify(userState, null, 2)} <== userState`);
-    history.pushState({}, 'User | KenPile', '/user');
-    hideAllPages();
-    userPage.classList.remove('hidden');
-});
+// userBtn.addEventListener('click', () => {
+//     console.log(`${JSON.stringify(userState, null, 2)} <== userState`);
+//     history.pushState({}, 'User | KenPile', '/user');
+//     hideAllPages();
+//     userPage.classList.remove('hidden');
+// });
 
-homeBtn.addEventListener('click', () => {
-    history.pushState({}, 'KenPile', '/');
-    hideAllPages();
+// homeBtn.addEventListener('click', () => {
+//     history.pushState({}, 'KenPile', '/');
+//     hideAllPages();
 
-    if (userState.signedIn) {
-        homePage.classList.remove('hidden');
-    } else {
-        landingPage.classList.remove('hidden');
-    }
-});
+//     if (userState.signedIn) {
+//         homePage.classList.remove('hidden');
+//     } else {
+//         landingPage.classList.remove('hidden');
+//     }
+// });
