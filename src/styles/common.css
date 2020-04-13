@@ -1,0 +1,13 @@
+/* This CSS file will be used by all the pages */
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    /* background-color: pink; */
+}
+
+.hidden {
+    display: none;
+}

@@ -6,12 +6,16 @@ const HtmlWebpackInlineSVGPlugin = require('html-webpack-inline-svg-plugin');
 
 //default configs
 var config = {
-    entry: './src/index.js',
+    entry: {
+        landing: './src/index.js',
+        login: './src/login/login.js',
+        home: './src/home/home.js',
+        note: './src/note/note.js',
+    },
     devServer: {
         port: 2020,
         hot: true,
         publicPath: '/',
-        historyApiFallback: true,
         watchContentBase: true,
     },
     output: {
@@ -20,10 +24,24 @@ var config = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'KenPile',
+            chunks: ['landing'],
             filename: 'index.html',
             template: './src/index.html',
-            //scriptLoading: 'defer',
+        }),
+        new HtmlWebpackPlugin({
+            chunks: ['login'],
+            filename: 'login.html',
+            template: './src/login/login.html',
+        }),
+        new HtmlWebpackPlugin({
+            chunks: ['home'],
+            filename: 'home.html',
+            template: './src/home/home.html',
+        }),
+        new HtmlWebpackPlugin({
+            chunks: ['note'],
+            filename: 'note.html',
+            template: './src/note/note.html',
         }),
         new HtmlWebpackInlineSVGPlugin({
             runPreEmit: true,
