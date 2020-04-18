@@ -1,12 +1,16 @@
-/*
-** Flow **
-- Get note ID from localStorage, if no ID, create one using nanoid lib
+/*  --- Flow ---
+- Get note ID from url, if ID is 'new', create one using nanoid
 
-- Try to read the contents of the note with that ^ ID from DB. 
+- Save ID in LS
 
-- If S (server) returns OK, show the note contents
+- If new note
+    - Send that ID to S to make a new note
+- Else
+    - Read the contents of the note with ID from LS from DB. 
+    - If S (server) returns OK, show the note contents
 
-- BOMB Else if server returns status = Error with body = new note created, initialise an empty editor
+- saveEveryNChanges
+
 */
 
 // --- imports ---
@@ -26,6 +30,10 @@ let editor;
 let dbSaveStatus = 'none'; // none || waiting || error
 
 function setDbSaveStatus(status) {
+    if (dbSaveStatus === 'waiting' && 'status' === 'none') {
+        dbSaveStatusSpan.textContent = 'Saved changes';
+    }
+
     dbSaveStatus = status;
     if (status === 'waiting') {
         dbSaveStatusSpan.textContent = 'Saving changes';
@@ -63,8 +71,11 @@ function handleTextChange() {
 }
 
 function initialiseEditor() {
-    const noteId = localStorage.getItem('noteId');
-    console.log(`${noteId} <== noteId`);
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const noteId = urlParams.get('id');
+
+    localStorage.setItem('noteId', noteId); // If value is 'new' it, could cause problem, but its fine as editor won't be enabled.
 
     editor = new Quill('#editor', {
         modules: { toolbar: '#toolbar' },
@@ -73,14 +84,17 @@ function initialiseEditor() {
 
     editor.enable(false); // allow editing only when OK with S
     editor.on('text-change', handleTextChange);
-    if (!noteId) {
+
+    if (noteId === 'new') {
         // create new note
         const newNoteId = nanoid(7); // Like 007
+
         dataFetch('POST', 'createNewNote', { id: newNoteId }, null)
             .then(res => {
                 console.dir(res);
                 console.log('^res');
                 if (res.status === 'OK') {
+                    history.replaceState({}, '', `/note.html?id=${newNoteId}`);
                     localStorage.setItem('noteId', newNoteId);
                     editor.enable(true);
                 }
@@ -91,8 +105,20 @@ function initialiseEditor() {
     } else {
         // note exists
 
-        editor.enable(); // BOMB enable only after fetching old note
         // fetch note from db
+        dataFetch('GET', 'fetchNote', { id: noteId }, null).then(res => {
+            if (res.status === 'OK') {
+                // set editor text with fetched content
+                editor.setContents(JSON.parse(res.body)['ops']);
+
+                // enable only after fetching old note
+                editor.enable();
+            } else {
+                alert("Couldn't get your note. Very sorry");
+
+                // TODO give user option to fetch again or create a new one
+            }
+        });
     }
 }
 

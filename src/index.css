@@ -1,3 +1,8 @@
 h1 {
     color: red;
 }
+
+#landing {
+    font-size: 45px;
+    text-align: center;
+}

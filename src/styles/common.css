@@ -5,9 +5,14 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
-    /* background-color: pink; */
+    background-color: var(--light-bg);
 }
 
 .hidden {
     display: none;
+}
+
+:root {
+    --primary900: #f57f17;
+    --light-bg: #fafafa;
 }
