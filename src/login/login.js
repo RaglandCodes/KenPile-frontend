@@ -12,6 +12,8 @@
 - Respond to errors with an alert (TODO improve this)
 */
 
+import('../styles/common.css');
+import('./login.css');
 import { dataFetch } from '../scripts/dataFetch';
 const singInBtn = document.querySelector('#GSingInBtn');
 
@@ -64,5 +66,6 @@ function loadGApi() {
 }
 
 window.onload = () => {
+    //TODO check if already signed in
     loadGApi();
 };

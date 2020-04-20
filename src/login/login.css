@@ -1,0 +1,6 @@
+#GSingInBtn {
+    display: flex;
+    align-items: center;
+    padding: 7px;
+    font-size: 25px;
+}

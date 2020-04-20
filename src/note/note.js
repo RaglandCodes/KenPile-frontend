@@ -21,7 +21,7 @@ const nanoid = require('nanoid');
 
 // --- DOM ---
 // put inside window.onload ?? TODO
-const dbSaveStatusSpan = document.querySelector('#dbSaveStatus');
+const dbSaveStatusSpan = document.querySelector('#save-status');
 
 // --- ^_^ ---
 const saveEveryNChanges = 15;
@@ -55,7 +55,8 @@ function handleTextChange() {
         console.log(`${editor.getText()} <== editor.getText()`);
         dataFetch('POST', 'updateNote', null, {
             id: localStorage.getItem('noteId'),
-            text: JSON.stringify(editor.getContents()),
+            delta: JSON.stringify(editor.getContents()),
+            text: editor.getText(),
         })
             .then(res => {
                 if (res.status === 'OK') {

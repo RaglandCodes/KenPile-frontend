@@ -1,0 +1,9 @@
+.note {
+    border: 1px solid black;
+    padding: 3;
+    font-size: 22px;
+}
+
+.note:hover {
+    border: 2px solid black;
+}

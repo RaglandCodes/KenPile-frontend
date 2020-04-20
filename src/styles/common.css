@@ -1,4 +1,33 @@
 /* This CSS file will be used by all the pages */
+
+/* * {
+    background-color: rgba(255, 0, 0, 0.2);
+}
+* * {
+    background-color: rgba(0, 255, 0, 0.2);
+}
+* * * {
+    background-color: rgba(0, 0, 255, 0.2);
+}
+* * * * {
+    background-color: rgba(255, 0, 255, 0.2);
+}
+* * * * * {
+    background-color: rgba(0, 255, 255, 0.2);
+}
+* * * * * * {
+    background-color: rgba(255, 255, 0, 0.2);
+}
+* * * * * * * {
+    background-color: rgba(255, 0, 0, 0.2);
+}
+* * * * * * * * {
+    background-color: rgba(0, 255, 0, 0.2);
+}
+* * * * * * * * * {
+    background-color: rgba(0, 0, 255, 0.2);
+} */
+
 html,
 body {
     width: 100%;
@@ -12,7 +41,23 @@ body {
     display: none;
 }
 
+.flex-one {
+    flex: 1;
+}
 :root {
     --primary900: #f57f17;
     --light-bg: #fafafa;
+}
+
+button {
+    background-color: white;
+    border: 1px solid var(--primary900);
+    border-radius: 4px;
+    font-size: 17px;
+}
+
+button:hover,
+button:focus {
+    outline: none;
+    border: 2px solid var(--primary900);
 }
