@@ -8,8 +8,6 @@ function setNotes(body) {
     const divAllNotes = document.querySelector('#all-notes');
 
     body.forEach(note => {
-        console.dir(note.Delta);
-        console.log('^note.Delta');
         divAllNotes.innerHTML += `
     <div class="note" id="note-${note.ID}"onClick="window.open('/note.html?id=${note.ID}')">
     </div>

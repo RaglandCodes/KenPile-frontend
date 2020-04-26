@@ -22,7 +22,7 @@ const nanoid = require('nanoid');
 // --- DOM ---
 // put inside window.onload ?? TODO
 const dbSaveStatusSpan = document.querySelector('#save-status');
-
+const saveBtn = document.querySelector('#save');
 // --- ^_^ ---
 const saveEveryNChanges = 15;
 let editsSinceSave = 0;
@@ -30,7 +30,17 @@ let editor;
 let dbSaveStatus = 'none'; // none || waiting || error
 
 function setDbSaveStatus(status) {
-    if (dbSaveStatus === 'waiting' && 'status' === 'none') {
+    console.log(`${editsSinceSave} <== editsSinceSave`);
+
+    //(Dis/en)able the button
+    if (status === 'waiting') {
+        saveBtn.disabled = true;
+    } else {
+        saveBtn.disabled = false;
+    }
+
+    //show appropirate message
+    if (dbSaveStatus === 'waiting' && status === 'none') {
         dbSaveStatusSpan.textContent = 'Saved changes';
     }
 
@@ -44,30 +54,44 @@ function setDbSaveStatus(status) {
         dbSaveStatusSpan.textContent = 'Error in saving changes';
         return;
     }
+}
 
-    dbSaveStatusSpan.textContent = '';
+function updateNote() {
+    if (editsSinceSave === -1) {
+        dbSaveStatusSpan.textContent = 'Already saved changes';
+        return;
+    }
+
+    setDbSaveStatus('waiting');
+    let changesGettingSaved = editsSinceSave;
+    console.log(`${changesGettingSaved} <== changesGettingSaved`);
+    dataFetch('POST', 'updateNote', null, {
+        id: localStorage.getItem('noteId'),
+        delta: JSON.stringify(editor.getContents()),
+        text: editor.getText(),
+    })
+        .then(res => {
+            if (res.status === 'OK') {
+                if (editsSinceSave === 0 && changesGettingSaved === 0) {
+                    // allow only one redundant update
+                    editsSinceSave = -1;
+                } else {
+                    editsSinceSave = editsSinceSave - changesGettingSaved;
+                }
+
+                setDbSaveStatus('none');
+            }
+        })
+        .catch(err => {
+            setDbSaveStatus('error');
+            console.log(`${err} <== POST updateNote err`);
+        });
 }
 function handleTextChange() {
     editsSinceSave += 1;
-    if (editsSinceSave > saveEveryNChanges && dbSaveStatus !== 'waiting') {
-        setDbSaveStatus('waiting');
 
-        console.log(`${editor.getText()} <== editor.getText()`);
-        dataFetch('POST', 'updateNote', null, {
-            id: localStorage.getItem('noteId'),
-            delta: JSON.stringify(editor.getContents()),
-            text: editor.getText(),
-        })
-            .then(res => {
-                if (res.status === 'OK') {
-                    editsSinceSave = 0; // Not good
-                    setDbSaveStatus('none');
-                }
-            })
-            .catch(err => {
-                setDbSaveStatus('error');
-                console.log(`${err} <== POST updateNote err`);
-            });
+    if (editsSinceSave > saveEveryNChanges && dbSaveStatus !== 'waiting') {
+        updateNote();
     }
 }
 
@@ -97,7 +121,10 @@ function initialiseEditor() {
                 if (res.status === 'OK') {
                     history.replaceState({}, '', `/note.html?id=${newNoteId}`);
                     localStorage.setItem('noteId', newNoteId);
+
+                    // enable only after creating new note
                     editor.enable(true);
+                    saveBtn.disabled = false;
                 }
             })
             .catch(createNewNoteErr => {
@@ -111,9 +138,12 @@ function initialiseEditor() {
             if (res.status === 'OK') {
                 // set editor text with fetched content
                 editor.setContents(JSON.parse(res.body)['ops']);
+                console.dir(JSON.parse(res.body)['ops']);
+                console.log("^JSON.parse(res.body)['ops']");
 
                 // enable only after fetching old note
                 editor.enable();
+                saveBtn.disabled = false;
             } else {
                 alert("Couldn't get your note. Very sorry");
 
@@ -125,4 +155,7 @@ function initialiseEditor() {
 
 window.onload = () => {
     initialiseEditor();
+
+    saveBtn.addEventListener('click', updateNote);
+    saveBtn.disabled = true;
 };

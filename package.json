@@ -6,7 +6,7 @@
     "scripts": {
         "start": "clear && webpack-dev-server --open --mode=development",
         "build": "webpack --mode=production",
-        "deploy": "npm run build && cd build && netlify deploy --prod"
+        "deploy": "npm run build && cd build && netlify deploy --dir build --prod"
     },
     "repository": {
         "type": "git",

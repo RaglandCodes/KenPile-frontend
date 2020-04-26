@@ -58,6 +58,6 @@ button {
 
 button:hover,
 button:focus {
-    outline: none;
-    border: 2px solid var(--primary900);
+    outline: 2px solid var(--primary900);
+    outline-style: double;
 }

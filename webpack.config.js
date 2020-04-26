@@ -36,6 +36,7 @@ var config = {
         new HtmlWebpackPlugin({
             chunks: ['home'],
             filename: 'home.html',
+            //filename: 'home/index.html',
             template: './src/home/home.html',
         }),
         new HtmlWebpackPlugin({
