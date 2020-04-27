@@ -10,16 +10,36 @@
     </head>
     <body>
         <div role="navigation" class="navigation">
-            <span class="navigation__logo">KenPile</span>
-
-            <button class="navigation__settings-btn">
+            <!-- <span class="navigation__logo"></span> -->
+            <img
+                src="src/home/logo.png"
+                alt="KenPile logo"
+                class="navigation__logo"
+            />
+            <div class="flex-one"></div>
+            <button class="navigation__settings-btn icon-btn">
                 <img
+                    inline
+                    src="src/home/icons/search.svg"
+                    class="navigation__icon icon-btn__icon icon-btn__icon--outlined icon-btn__icon--filled"
+                />
+                <!-- <img
+                    inline
+                    src="src/home/icons/search.svg"
+                    class="navigation__icon icon-btn__icon icon-btn__icon--filled"
+                /> -->
+            </button>
+
+            <button class="navigation__settings-btn icon-btn">
+                <img
+                    inline
                     src="src/home/icons/settings-outlined.svg"
-                    class="navigation__icon settings-btn__icon--outlined"
+                    class="navigation__icon icon-btn__icon icon-btn__icon--outlined"
                 />
                 <img
+                    inline
                     src="src/home/icons/settings-filled.svg"
-                    class="navigation__icon settings-btn__icon--filled"
+                    class="navigation__icon icon-btn__icon icon-btn__icon--filled"
                 />
             </button>
         </div>

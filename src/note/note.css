@@ -2,17 +2,27 @@ body {
     display: flex;
     flex-direction: column;
 }
-.ql-clipboard {
-    display: none;
-}
 
+/* --- Toolbar --- */
 #toolbar {
+    --toolbar-height: 50px;
+    --toolbar-padding: 0px;
     display: flex;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid var(--primary900);
     margin-bottom: 1px;
 }
 
-.toolbar__btn {
+#toolbar .icon-btn {
+    margin-right: 4px;
+}
+
+.icon-btn .icon {
+    /* --icon-size: 27px;
+    width: var(--icon-size);
+    height: var(--icon-size); */
+}
+
+/* .toolbar__btn {
     border: none;
     margin: 2px;
 }
@@ -20,7 +30,7 @@ body {
     --icon-size: 37px;
     width: var(--icon-size);
     height: var(var(--icon-size));
-}
+} */
 
 .save-container {
     display: flex;
@@ -36,8 +46,13 @@ body {
     font-size: 17px;
 }
 
+/* --- Editor --- */
+.ql-clipboard {
+    display: none;
+}
+
 #editor {
-    border-top: 1px solid black;
+    border-top: 1px solid var(--primary900);
     flex-grow: 1;
     display: flex;
     overflow-y: scroll;
