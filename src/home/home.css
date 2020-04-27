@@ -1,3 +1,30 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.navigation {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: var(--dark-bg);
+}
+
+.settings-btn__icon--filled {
+    display: none;
+}
+
+.settings-btn__icon--outlined {
+    display: block;
+}
+.navigation__settings-btn:hover > .settings-btn__icon--outlined {
+    display: none;
+}
+
+.navigation__settings-btn:hover > .settings-btn__icon--filled {
+    display: block;
+}
+
 .note {
     border: 1px solid black;
     padding: 3;

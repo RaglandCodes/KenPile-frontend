@@ -1,9 +1,15 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
 .ql-clipboard {
     display: none;
 }
 
 #toolbar {
     display: flex;
+    border-bottom: 1px solid black;
+    margin-bottom: 1px;
 }
 
 .toolbar__btn {
@@ -15,10 +21,29 @@
     width: var(--icon-size);
     height: var(var(--icon-size));
 }
-.save-status-container {
+
+.save-container {
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
-#save-status {
+.save-container--btn {
+    flex-grow: 1;
+}
+
+.save-container--message {
+    font-size: 17px;
+}
+
+#editor {
+    border-top: 1px solid black;
+    flex-grow: 1;
+    display: flex;
+    overflow-y: scroll;
+}
+
+.ql-editor {
+    flex-grow: 1;
+    outline: none;
 }

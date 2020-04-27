@@ -26,6 +26,10 @@ async function dataFetch(method, route, headers, body) {
         })
         .catch(err => {
             console.log(`${err} <= error in fetching ${queryURL}`);
+            throw {
+                status: 'ERROR',
+                body: err,
+            };
             return 'ERROR';
         });
 }

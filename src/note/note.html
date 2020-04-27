@@ -1,7 +1,11 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
         <title>KenPile</title>
         <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+        <meta charset="utf-8" />
+        <meta name="description" content="Your knowledge companion" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
     </head>
     <body>
         <div id="toolbar">
@@ -27,12 +31,16 @@
                 />
             </button>
             <div class="flex-one"></div>
-            <button id="save">Save changes</button>
+            <div class="save-container">
+                <button id="save" class="save-container--btn">
+                    Save changes
+                </button>
+                <span id="save-status" class="save-container--message"
+                    >&nbsp;
+                </span>
+            </div>
         </div>
 
-        <div class="save-status-container">
-            <span id="save-status">AAAA</span>
-        </div>
         <div id="editor"></div>
     </body>
 </html>

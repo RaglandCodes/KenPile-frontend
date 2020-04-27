@@ -47,6 +47,8 @@ body {
 :root {
     --primary900: #f57f17;
     --light-bg: #fafafa;
+    --surface: #fafafa;
+    --dark-bg: #212121;
 }
 
 button {
@@ -58,6 +60,6 @@ button {
 
 button:hover,
 button:focus {
-    outline: 2px solid var(--primary900);
-    outline-style: double;
+    /* outline: 2px solid var(--primary900);
+    border: 1px solid rgba(0, 0, 0, 0); */
 }

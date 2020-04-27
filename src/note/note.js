@@ -25,13 +25,11 @@ const dbSaveStatusSpan = document.querySelector('#save-status');
 const saveBtn = document.querySelector('#save');
 // --- ^_^ ---
 const saveEveryNChanges = 15;
-let editsSinceSave = 0;
+let editsSinceSave = -1; // text-change event is fired when setting text. So = 0 after setting text
 let editor;
 let dbSaveStatus = 'none'; // none || waiting || error
 
 function setDbSaveStatus(status) {
-    console.log(`${editsSinceSave} <== editsSinceSave`);
-
     //(Dis/en)able the button
     if (status === 'waiting') {
         saveBtn.disabled = true;
@@ -41,30 +39,36 @@ function setDbSaveStatus(status) {
 
     //show appropirate message
     if (dbSaveStatus === 'waiting' && status === 'none') {
-        dbSaveStatusSpan.textContent = 'Saved changes';
+        dbSaveStatusSpan.textContent = 'Changes saved';
+    }
+
+    if (status === 'typing') {
+        if (editsSinceSave > 1 && dbSaveStatus === 'none') {
+            dbSaveStatusSpan.textContent = 'You have unsaved work';
+        }
+        return;
     }
 
     dbSaveStatus = status;
     if (status === 'waiting') {
-        dbSaveStatusSpan.textContent = 'Saving changes';
+        dbSaveStatusSpan.textContent = 'Saving changes...';
         return;
     }
 
     if (status === 'error') {
-        dbSaveStatusSpan.textContent = 'Error in saving changes';
+        dbSaveStatusSpan.textContent = 'Error in saving.';
         return;
     }
 }
 
 function updateNote() {
     if (editsSinceSave === -1) {
-        dbSaveStatusSpan.textContent = 'Already saved changes';
+        dbSaveStatusSpan.textContent = 'Already saved';
         return;
     }
 
     setDbSaveStatus('waiting');
     let changesGettingSaved = editsSinceSave;
-    console.log(`${changesGettingSaved} <== changesGettingSaved`);
     dataFetch('POST', 'updateNote', null, {
         id: localStorage.getItem('noteId'),
         delta: JSON.stringify(editor.getContents()),
@@ -75,7 +79,7 @@ function updateNote() {
                 if (editsSinceSave === 0 && changesGettingSaved === 0) {
                     // allow only one redundant update
                     editsSinceSave = -1;
-                } else {
+                } else if (editsSinceSave > 0) {
                     editsSinceSave = editsSinceSave - changesGettingSaved;
                 }
 
@@ -89,7 +93,7 @@ function updateNote() {
 }
 function handleTextChange() {
     editsSinceSave += 1;
-
+    setDbSaveStatus('typing');
     if (editsSinceSave > saveEveryNChanges && dbSaveStatus !== 'waiting') {
         updateNote();
     }
@@ -124,6 +128,7 @@ function initialiseEditor() {
 
                     // enable only after creating new note
                     editor.enable(true);
+                    editor.focus();
                     saveBtn.disabled = false;
                 }
             })
@@ -138,11 +143,10 @@ function initialiseEditor() {
             if (res.status === 'OK') {
                 // set editor text with fetched content
                 editor.setContents(JSON.parse(res.body)['ops']);
-                console.dir(JSON.parse(res.body)['ops']);
-                console.log("^JSON.parse(res.body)['ops']");
 
                 // enable only after fetching old note
-                editor.enable();
+                editor.enable(true);
+                editor.focus();
                 saveBtn.disabled = false;
             } else {
                 alert("Couldn't get your note. Very sorry");
@@ -159,3 +163,12 @@ window.onload = () => {
     saveBtn.addEventListener('click', updateNote);
     saveBtn.disabled = true;
 };
+
+window.addEventListener('beforeunload', event => {
+    if (editsSinceSave > 0) {
+        event.preventDefault();
+        event.returnValue = '';
+
+        updateNote();
+    }
+});
