@@ -19,7 +19,7 @@ var config = {
         watchContentBase: true,
     },
     output: {
-        filename: '[name].[hash].js',
+        filename: '[name]/[name].[hash].js',
         path: path.resolve(__dirname, './build'),
     },
     plugins: [
@@ -30,18 +30,18 @@ var config = {
         }),
         new HtmlWebpackPlugin({
             chunks: ['login'],
-            filename: 'login.html',
+            filename: 'login/index.html',
             template: './src/login/login.html',
         }),
         new HtmlWebpackPlugin({
             chunks: ['home'],
-            filename: 'home.html',
+            filename: 'home/index.html',
             //filename: 'home/index.html',
             template: './src/home/home.html',
         }),
         new HtmlWebpackPlugin({
             chunks: ['note'],
-            filename: 'note.html',
+            filename: 'note/index.html',
             template: './src/note/note.html',
         }),
         new HtmlWebpackInlineSVGPlugin({

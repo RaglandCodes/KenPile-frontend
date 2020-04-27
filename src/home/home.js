@@ -9,7 +9,7 @@ function setNotes(body) {
 
     body.forEach(note => {
         divAllNotes.innerHTML += `
-    <div class="note" id="note-${note.ID}"onClick="window.location.assign('/note.html?id=${note.ID}');">
+    <div class="note" id="note-${note.ID}"onClick="window.location.assign('/note?id=${note.ID}');">
     </div>
     `;
 

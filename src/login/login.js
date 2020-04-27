@@ -50,7 +50,7 @@ function loadGApi() {
                     res => {
                         if (res) {
                             localStorage.setItem('signedIn', 'true');
-                            window.location.replace('/home.html');
+                            window.location.replace('/home');
                         } else {
                             alert("Couldn't sign in.");
                         }
