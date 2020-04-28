@@ -12,8 +12,8 @@
 - Respond to errors with an alert (TODO improve this)
 */
 
-import('../styles/common.css');
-import('./login.css');
+require('../styles/common.css');
+require('./login.css');
 import { dataFetch } from '../scripts/dataFetch';
 const singInBtn = document.querySelector('#GSingInBtn');
 
