@@ -36,7 +36,6 @@ var config = {
         new HtmlWebpackPlugin({
             chunks: ['home'],
             filename: 'home/index.html',
-            //filename: 'home/index.html',
             template: './src/home/home.html',
         }),
         new HtmlWebpackPlugin({
@@ -48,7 +47,7 @@ var config = {
             runPreEmit: true,
         }),
         new MiniCssExtractPlugin({
-            filename: '[name].[contenthash].css',
+            filename: '[name]/[name].[contenthash].css',
         }),
     ],
     module: {
