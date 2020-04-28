@@ -12,8 +12,8 @@
 - Respond to errors with an alert (TODO improve this)
 */
 
-import('../styles/common.css');
-import('./login.css');
+require('../styles/common.css');
+require('./login.css');
 import { dataFetch } from '../scripts/dataFetch';
 const singInBtn = document.querySelector('#GSingInBtn');
 
@@ -50,7 +50,7 @@ function loadGApi() {
                     res => {
                         if (res) {
                             localStorage.setItem('signedIn', 'true');
-                            window.location.replace('/home.html');
+                            window.location.replace('/home');
                         } else {
                             alert("Couldn't sign in.");
                         }

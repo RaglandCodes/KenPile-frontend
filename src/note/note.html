@@ -1,38 +1,49 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
         <title>KenPile</title>
         <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+        <meta charset="utf-8" />
+        <meta name="description" content="Your knowledge companion" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
     </head>
     <body>
         <div id="toolbar">
-            <button class="ql-bold toolbar__btn">
+            <button class="ql-bold toolbar__btn icon-btn">
                 <img
+                    inline
                     src="src/note/icons/bold.svg"
                     alt="Bold"
-                    class="toolbar-btn__icon"
+                    class="toolbar-btn__icon icon-btn__icon icon-btn__icon--filled icon-btn__icon--outlined"
                 />
             </button>
-            <button class="ql-italic toolbar__btn">
+            <button class="ql-italic toolbar__btn icon-btn">
                 <img
+                    inline
                     src="src/note/icons/italics.svg"
                     alt="Italics"
-                    class="toolbar-btn__icon"
+                    class="toolbar-btn__icon icon-btn__icon icon-btn__icon--filled icon-btn__icon--outlined"
                 />
             </button>
-            <button class="ql-underline toolbar__btn">
+            <button class="ql-underline toolbar__btn icon-btn">
                 <img
+                    inline
                     src="src/note/icons/underline.svg"
                     alt="Underline"
-                    class="toolbar-btn__icon"
+                    class="toolbar-btn__icon icon-btn__icon icon-btn__icon--filled icon-btn__icon--outlined"
                 />
             </button>
             <div class="flex-one"></div>
-            <button id="save">Save changes</button>
+            <div class="save-container">
+                <button id="save" class="save-container--btn">
+                    Save changes
+                </button>
+                <span id="save-status" class="save-container--message"
+                    >&nbsp;
+                </span>
+            </div>
         </div>
 
-        <div class="save-status-container">
-            <span id="save-status">AAAA</span>
-        </div>
         <div id="editor"></div>
     </body>
 </html>

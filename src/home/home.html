@@ -3,10 +3,49 @@
     <head>
         <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
         <meta charset="utf-8" />
+        <meta name="description" content="Your knowledge companion" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charset="utf-8" />
         <title>KenPile</title>
     </head>
     <body>
-        <a href="/note.html?id=new">Create new note</a>
-        <div id="all-notes"></div>
+        <div role="navigation" class="navigation">
+            <!-- <span class="navigation__logo"></span> -->
+            <img
+                src="../home/logo.png"
+                alt="KenPile logo"
+                class="navigation__logo"
+            />
+            <div class="flex-one"></div>
+            <button class="navigation__settings-btn icon-btn">
+                <img
+                    inline
+                    src="src/home/icons/search.svg"
+                    class="navigation__icon icon-btn__icon icon-btn__icon--outlined icon-btn__icon--filled"
+                />
+                <!-- <img
+                    inline
+                    src="src/home/icons/search.svg"
+                    class="navigation__icon icon-btn__icon icon-btn__icon--filled"
+                /> -->
+            </button>
+
+            <button class="navigation__settings-btn icon-btn">
+                <img
+                    inline
+                    src="src/home/icons/settings-outlined.svg"
+                    class="navigation__icon icon-btn__icon icon-btn__icon--outlined"
+                />
+                <img
+                    inline
+                    src="src/home/icons/settings-filled.svg"
+                    class="navigation__icon icon-btn__icon icon-btn__icon--filled"
+                />
+            </button>
+        </div>
+        <div class="body">
+            <a href="/note.html?id=new">Create new note</a>
+            <div id="all-notes"></div>
+        </div>
     </body>
 </html>

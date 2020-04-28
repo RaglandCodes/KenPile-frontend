@@ -1,5 +1,7 @@
 /* This CSS file will be used by all the pages */
 
+/* Use this snippet for debugging */
+
 /* * {
     background-color: rgba(255, 0, 0, 0.2);
 }
@@ -45,8 +47,11 @@ body {
     flex: 1;
 }
 :root {
-    --primary900: #f57f17;
-    --light-bg: #fafafa;
+    --primary900: #b71c1c;
+    --light-bg: #eeeeee;
+    --surface: #fafafa;
+    --dark-bg: #212121;
+    --surface-bg: #fafafa;
 }
 
 button {
@@ -56,8 +61,48 @@ button {
     font-size: 17px;
 }
 
+.icon-btn {
+    --padding: 8px;
+    border: none;
+    background-color: inherit;
+    padding: var(--padding);
+}
+
+.icon-btn:hover {
+    border-radius: 50%;
+    background-color: var(--surface-bg);
+}
+.icon-btn:focus {
+    border-radius: 50%;
+    outline: none;
+    border: 1px solid var(--primary900);
+}
+
+.icon-btn__icon {
+    margin: auto;
+    fill: var(--dark-bg);
+}
+
+/* First hide, the icon, then show, so that where same icon is used on hover, we can use only one  */
+.icon-btn__icon--filled {
+    display: none;
+}
+
+.icon-btn__icon--outlined {
+    display: block;
+}
+.icon-btn:hover > .icon-btn__icon--outlined,
+.icon-btn:focus > .icon-btn__icon--outlined {
+    display: none;
+}
+
+.icon-btn:focus > .icon-btn__icon--filled,
+.icon-btn:hover > .icon-btn__icon--filled {
+    display: block;
+    fill: var(--primary900);
+}
+
 button:hover,
 button:focus {
-    outline: 2px solid var(--primary900);
-    outline-style: double;
+    /* TODO */
 }

@@ -1,7 +1,33 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.navigation {
+    --nav-height: 50px;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between; */
+    align-items: stretch;
+    background-color: var(--light-bg);
+    height: var(--nav-height);
+    border-bottom: 1px solid var(--primary900);
+}
+
+.navigation__logo {
+    height: var(--nav-height);
+    width: var(--nav-height);
+}
+
+.navigation .icon-btn {
+    width: var(--nav-height);
+    height: var(--nav-height);
+}
 .note {
     border: 1px solid black;
     padding: 3;
     font-size: 22px;
+    background-color: var(--surface-bg);
 }
 
 .note:hover {

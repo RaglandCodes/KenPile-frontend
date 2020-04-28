@@ -1,24 +1,54 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Toolbar --- */
+#toolbar {
+    --toolbar-height: 50px;
+    --toolbar-padding: 0px;
+    display: flex;
+    border-bottom: 1px solid var(--primary900);
+    margin-bottom: 1px;
+}
+
+#toolbar .icon-btn {
+    margin-right: 4px;
+}
+
+#toolbar .icon-btn__icon {
+    --icon-size: 27px;
+    width: var(--icon-size);
+    height: var(--icon-size);
+}
+
+.save-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.save-container--btn {
+    flex-grow: 1;
+}
+
+.save-container--message {
+    font-size: 17px;
+}
+
+/* --- Editor --- */
 .ql-clipboard {
     display: none;
 }
 
-#toolbar {
+#editor {
+    border-top: 1px solid var(--primary900);
+    flex-grow: 1;
     display: flex;
+    overflow-y: scroll;
 }
 
-.toolbar__btn {
-    border: none;
-    margin: 2px;
-}
-.toolbar-btn__icon {
-    --icon-size: 37px;
-    width: var(--icon-size);
-    height: var(var(--icon-size));
-}
-.save-status-container {
-    display: flex;
-    justify-content: flex-end;
-}
-
-#save-status {
+.ql-editor {
+    flex-grow: 1;
+    outline: none;
 }

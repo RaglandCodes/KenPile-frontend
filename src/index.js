@@ -1,2 +1,2 @@
-import './styles/common.css';
-import './index.css';
+require('./styles/common.css');
+require('./index.css');
