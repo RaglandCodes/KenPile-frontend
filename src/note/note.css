@@ -16,21 +16,11 @@ body {
     margin-right: 4px;
 }
 
-.icon-btn .icon {
-    /* --icon-size: 27px;
+#toolbar .icon-btn__icon {
+    --icon-size: 27px;
     width: var(--icon-size);
-    height: var(--icon-size); */
+    height: var(--icon-size);
 }
-
-/* .toolbar__btn {
-    border: none;
-    margin: 2px;
-}
-.toolbar-btn__icon {
-    --icon-size: 37px;
-    width: var(--icon-size);
-    height: var(var(--icon-size));
-} */
 
 .save-container {
     display: flex;

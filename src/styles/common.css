@@ -1,5 +1,7 @@
 /* This CSS file will be used by all the pages */
 
+/* Use this snippet for debugging */
+
 /* * {
     background-color: rgba(255, 0, 0, 0.2);
 }
@@ -64,8 +66,6 @@ button {
     border: none;
     background-color: inherit;
     padding: var(--padding);
-    /* background-color: cadetblue; */
-    /* display: flex; */
 }
 
 .icon-btn:hover {
@@ -79,13 +79,11 @@ button {
 }
 
 .icon-btn__icon {
-    /* --icon-size: 27px;
-    width: var(--icon-size);
-    height: var(--icon-size); */
     margin: auto;
+    fill: var(--dark-bg);
 }
 
-/* First hide, the icon, then show so that where same icon is used on hover, we have to use only one  */
+/* First hide, the icon, then show, so that where same icon is used on hover, we can use only one  */
 .icon-btn__icon--filled {
     display: none;
 }
@@ -106,6 +104,5 @@ button {
 
 button:hover,
 button:focus {
-    /* outline: 2px solid var(--primary900);
-    border: 1px solid rgba(0, 0, 0, 0); */
+    /* TODO */
 }
