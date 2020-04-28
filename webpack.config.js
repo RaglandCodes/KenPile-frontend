@@ -61,6 +61,18 @@ var config = {
                     'css-loader',
                 ],
             },
+            {
+                test: /\.(png|jpg|jpeg|gif)$/,
+                loader: 'file-loader',
+                options: {
+                    name(resourcePath, resourceQuery) {
+                        if (/src\/home/.test(resourcePath)) {
+                            return 'home/[name].[ext]';
+                        }
+                        return 'images/[name].[ext]';
+                    },
+                },
+            },
         ],
     },
     stats: 'errors-warnings',

@@ -1,5 +1,6 @@
 require('../styles/common.css');
 require('./home.css');
+require('./logo.png');
 import { dataFetch } from '../scripts/dataFetch';
 
 function setNotes(body) {
